@@ -11,4 +11,8 @@ public class PhoneNumber {
     public static PhoneNumber of(String phoneNumber){
         return new PhoneNumber(phoneNumber);
     }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
 }

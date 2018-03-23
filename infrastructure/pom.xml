@@ -9,18 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>jar</artifactId>
-
-    <dependencies>
-        <dependency>
-            <groupId>be.cm.mredant</groupId>
-            <artifactId>api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter</artifactId>
-        </dependency>
-    </dependencies>
+    <artifactId>infrastructure</artifactId>
 
 
 </project>

@@ -13,12 +13,12 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.moaa</groupId>
-            <artifactId>service</artifactId>
-        </dependency>
-        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>be.cm.mredant</groupId>
+            <artifactId>service</artifactId>
         </dependency>
     </dependencies>
 

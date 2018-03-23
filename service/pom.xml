@@ -13,7 +13,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.moaa</groupId>
+            <groupId>be.cm.mredant</groupId>
             <artifactId>domain</artifactId>
         </dependency>
     </dependencies>

@@ -17,6 +17,22 @@ public class Address {
         return new Address (streetName,houseNumber,cityName,postalCode);
     }
 
+    public String getStreetName() {
+        return streetName;
+    }
+
+    public String getHouseNumber() {
+        return houseNumber;
+    }
+
+    public String getCityName() {
+        return cityName;
+    }
+
+    public String getPostalCode() {
+        return postalCode;
+    }
+
     @Override
     public String toString() {
         return "Address{" +
