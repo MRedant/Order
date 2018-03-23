@@ -1,6 +1,7 @@
-# Self evaluation 3: Örder
 
 self evaluating ex. from : www.switchfully.com
+
+# Self evaluation 3: Örder
 
 Örder is an innovative (not really) order management application. The front-end 
 will be a beautiful designed javascript-based application that will communicate with an even more 
