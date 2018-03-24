@@ -4,6 +4,7 @@ import be.cm.mredant.customer.address.Address;
 import be.cm.mredant.customer.email.Email;
 import be.cm.mredant.customer.phoneNumber.PhoneNumber;
 
+import java.util.Objects;
 import java.util.UUID;
 
 public class Customer {
@@ -46,6 +47,24 @@ public class Customer {
 
     public PhoneNumber getPhoneNumber() {
         return phoneNumber;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Customer customer = (Customer) o;
+        return  Objects.equals(getFirstName(), customer.getFirstName()) &&
+                Objects.equals(getLastName(), customer.getLastName()) &&
+                Objects.equals(getEmail(), customer.getEmail()) &&
+                Objects.equals(getAddress(), customer.getAddress()) &&
+                Objects.equals(getPhoneNumber(), customer.getPhoneNumber());
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(getFirstName(), getLastName(), getEmail(), getAddress(), getPhoneNumber());
     }
 
     public static class CustomerBuilder {

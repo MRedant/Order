@@ -1,5 +1,7 @@
 package be.cm.mredant.customer.address;
 
+import java.util.Objects;
+
 public class Address {
     private String streetName;
     private String houseNumber;
@@ -31,6 +33,23 @@ public class Address {
 
     public String getPostalCode() {
         return postalCode;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Address address = (Address) o;
+        return Objects.equals(getStreetName(), address.getStreetName()) &&
+                Objects.equals(getHouseNumber(), address.getHouseNumber()) &&
+                Objects.equals(getCityName(), address.getCityName()) &&
+                Objects.equals(getPostalCode(), address.getPostalCode());
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(getStreetName(), getHouseNumber(), getCityName(), getPostalCode());
     }
 
     @Override

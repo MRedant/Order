@@ -19,7 +19,8 @@ public class CustomerMapper {
                 .withLastName(customer.getLastName())
                 .withAddress(addressMapper.toDto(customer.getAddress()))
                 .withEmail(emailMapper.toDto(customer.getEmail()))
-                .withPhoneNumber(phoneNumberMapper.toDto(customer.getPhoneNumber()));
+                .withPhoneNumber(phoneNumberMapper.toDto(customer.getPhoneNumber()))
+                .withId(customer.getCustomerId());
     }
 
     public Customer toDomain(CustomerDto customerDto) {

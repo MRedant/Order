@@ -4,7 +4,7 @@ import java.util.UUID;
 
 public class CustomerDto {
 
-    private UUID customerId;
+    private String customerId;
     private String firstName;
     private String lastName;
     private EmailDto email;
@@ -44,7 +44,12 @@ public class CustomerDto {
         return this;
     }
 
-    public UUID getCustomerId() {
+    public CustomerDto withId(UUID customerId){
+        this.customerId = customerId.toString();
+        return this;
+    }
+
+    public String getCustomerId() {
         return customerId;
     }
 

@@ -5,6 +5,7 @@ import be.cm.mredant.exceptions.EntryAlreadyExistsInDatabaseException;
 
 import javax.inject.Named;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Named
@@ -16,9 +17,13 @@ public class CustomerDatabase {
         this.customerDatabase = new ArrayList<>();
     }
 
+    public List<Customer> getCustomerDatabase() {
+        return Collections.unmodifiableList(customerDatabase);
+    }
+
     public Customer addNewCustomer(Customer customer) throws EntryAlreadyExistsInDatabaseException{
         if (customerDatabaseContainsCustomer(customer)) {
-            throw new EntryAlreadyExistsInDatabaseException(customer.getCustomerId().toString(),"CustomerDatabase");
+            throw new EntryAlreadyExistsInDatabaseException(customer.getFirstName()+" "+customer.getLastName(),"CustomerDatabase");
         }
         customerDatabase.add(customer);
         return customer;
