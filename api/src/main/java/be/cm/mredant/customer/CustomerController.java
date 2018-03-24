@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.*;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 import javax.inject.Inject;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(path = {"/customer"})
@@ -26,9 +28,17 @@ public class CustomerController {
         return customerMapper.toDto(customerService.addCustomerToDatabase(customerMapper.toDomain(customerDto)));
     }
 
-    @GetMapping(consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
+    @GetMapping(path = "/{customerId}", produces = APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
-    public CustomerDto getCustomerByCustomerId (@RequestParam String customerId){
+    public CustomerDto getCustomerByCustomerId (@PathVariable String customerId){
         return customerMapper.toDto(customerService.getCustomerById(customerId));
+    }
+
+    @GetMapping(path = "/all", produces = APPLICATION_JSON_VALUE)
+    @ResponseStatus(HttpStatus.OK)
+    public List<CustomerDto> getCustomerByCustomerId (){
+        return customerService.getAllCustomers().stream()
+                .map(customerMapper::toDto)
+                .collect(Collectors.toList());
     }
 }

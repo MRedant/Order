@@ -44,4 +44,8 @@ public class CustomerDatabase {
         }
         throw new UnknownResourceException("customerId :" + customerId, "Customer");
     }
+
+    public List<Customer> getAllCustomers() {
+        return Collections.unmodifiableList(customerDatabase);
+    }
 }

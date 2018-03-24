@@ -1,28 +1,52 @@
 package be.cm.mredant;
 
 import be.cm.mredant.exceptions.EntryAlreadyExistsInDatabaseException;
+import be.cm.mredant.exceptions.ErrorDetails;
 import be.cm.mredant.exceptions.UnKnownFieldFoundException;
 import be.cm.mredant.exceptions.UnknownResourceException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
+
+import java.util.Date;
 
 @ControllerAdvice(basePackages = {"be.cm.mredant"})
-public class OrderControllerAdvice {
+@RestController
+public class OrderControllerAdvice extends ResponseEntityExceptionHandler {
+
+    //http://www.springboottutorial.com/spring-boot-exception-handling-for-rest-services
 
     @ExceptionHandler(EntryAlreadyExistsInDatabaseException.class)
-    public ResponseEntity<String> convertUnknownIdException(final EntryAlreadyExistsInDatabaseException exception) {
-        return new ResponseEntity<>(exception.getMessage(),HttpStatus.NOT_FOUND);
+    public final ResponseEntity<ErrorDetails> convertUnknownIdException(EntryAlreadyExistsInDatabaseException exception, WebRequest request) {
+        ErrorDetails errorDetails = new ErrorDetails(new Date(), exception.getMessage(),
+                request.getDescription(false));
+        return new ResponseEntity<>(errorDetails,HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(UnKnownFieldFoundException.class)
-    public ResponseEntity<String> convertIllegalFieldFoundException(final UnKnownFieldFoundException exception) {
-        return new ResponseEntity<>(exception.getMessage(),HttpStatus.BAD_REQUEST);
+    public final ResponseEntity<ErrorDetails> convertIllegalFieldFoundException(UnKnownFieldFoundException exception, WebRequest request) {
+        ErrorDetails errorDetails = new ErrorDetails(new Date(), exception.getMessage(),
+                request.getDescription(false));
+        return new ResponseEntity<>(errorDetails,HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(UnknownResourceException.class)
-    public ResponseEntity<String> convertIllegalFieldFoundException(final UnknownResourceException exception) {
-        return new ResponseEntity<>(exception.getMessage(),HttpStatus.BAD_REQUEST);
+    public final ResponseEntity<ErrorDetails> convertIllegalFieldFoundException(UnknownResourceException exception, WebRequest request) {
+        ErrorDetails errorDetails = new ErrorDetails(new Date(), exception.getMessage(),
+                request.getDescription(false));
+        return new ResponseEntity<>(errorDetails,HttpStatus.BAD_REQUEST);
     }
+
+    //handles all other exceptions
+    @ExceptionHandler(Exception.class)
+    public final ResponseEntity<ErrorDetails> handleAllExceptions(Exception exception, WebRequest request) {
+        ErrorDetails errorDetails = new ErrorDetails(new Date(), exception.getMessage(),
+                request.getDescription(false));
+        return new ResponseEntity<>(errorDetails, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
 }
