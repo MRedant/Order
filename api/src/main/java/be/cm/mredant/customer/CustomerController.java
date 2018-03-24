@@ -33,7 +33,6 @@ public class CustomerController {
     public CustomerDto getCustomerByCustomerId (@PathVariable String customerId){
         return customerMapper.toDto(customerService.getCustomerById(customerId));
     }
-
     @GetMapping(path = "/all", produces = APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
     public List<CustomerDto> getCustomerByCustomerId (){
