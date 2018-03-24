@@ -18,4 +18,7 @@ public class CustomerService {
     }
 
 
+    public Customer getCustomerById(String customerId) {
+        return customerRepository.getCustomerById(customerId);
+    }
 }

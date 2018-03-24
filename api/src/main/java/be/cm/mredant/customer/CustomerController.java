@@ -25,4 +25,10 @@ public class CustomerController {
     public CustomerDto addCustomerToDatabase (@RequestBody CustomerDto customerDto){
         return customerMapper.toDto(customerService.addCustomerToDatabase(customerMapper.toDomain(customerDto)));
     }
+
+    @GetMapping(consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
+    @ResponseStatus(HttpStatus.OK)
+    public CustomerDto getCustomerByCustomerId (@RequestParam String customerId){
+        return customerMapper.toDto(customerService.getCustomerById(customerId));
+    }
 }

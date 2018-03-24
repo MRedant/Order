@@ -18,4 +18,8 @@ public class CustomerRepository {
     public Customer addCustomerToDatabase(Customer customer){
         return customerDatabase.addNewCustomer(customer);
     }
+
+    public Customer getCustomerById(String customerId) {
+        return customerDatabase.getCustomerById(customerId);
+    }
 }
