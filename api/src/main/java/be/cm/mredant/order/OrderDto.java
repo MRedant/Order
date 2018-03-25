@@ -1,4 +1,59 @@
 package be.cm.mredant.order;
 
+import be.cm.mredant.customer.CustomerDto;
+
+import java.util.List;
+
 public class OrderDto {
+
+    private String orderNr;
+    private CustomerDto customer;
+    private List<OrderedItemDto> orderedItemList;
+
+    private OrderDto(String orderNr, CustomerDto customer, List<OrderedItemDto> orderedItemList) {
+        this.orderNr = orderNr;
+        this.customer = customer;
+        this.orderedItemList = orderedItemList;
+    }
+
+    public String getOrderNr() {
+        return orderNr;
+    }
+
+    public CustomerDto getCustomer() {
+        return customer;
+    }
+
+    public List<OrderedItemDto> getOrderedItemList() {
+        return orderedItemList;
+    }
+
+    public static class OrderDtoBuilder {
+        private String orderNr;
+        private CustomerDto customer;
+        private List<OrderedItemDto> orderedItemList;
+
+        public static OrderDtoBuilder builder() {
+            return new OrderDtoBuilder();
+        }
+
+        public OrderDtoBuilder withOrderNr(String orderNr) {
+            this.orderNr = orderNr;
+            return this;
+        }
+
+        public OrderDtoBuilder withCustomer(CustomerDto customer) {
+            this.customer = customer;
+            return this;
+        }
+
+        public OrderDtoBuilder withOrderedItemList(List<OrderedItemDto> orderedItemList) {
+            this.orderedItemList = orderedItemList;
+            return this;
+        }
+
+        public OrderDto build() {
+            return new OrderDto(orderNr, customer, orderedItemList);
+        }
+    }
 }

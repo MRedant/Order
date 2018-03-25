@@ -20,7 +20,7 @@ public class ItemController {
         this.itemService = itemService;
     }
 
-    @PostMapping(produces = APPLICATION_JSON_VALUE)
+    @PostMapping(consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
     public ItemDto addItem (@RequestBody ItemDto itemDto){
         return itemMapper.toDto(itemService.addNewItemToDatabase(itemMapper.toDomain(itemDto)));
