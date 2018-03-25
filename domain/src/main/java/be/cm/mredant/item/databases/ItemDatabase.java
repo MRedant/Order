@@ -1,6 +1,7 @@
 package be.cm.mredant.item.databases;
 
 import be.cm.mredant.exceptions.EntryAlreadyExistsInDatabaseException;
+import be.cm.mredant.exceptions.UnknownResourceException;
 import be.cm.mredant.item.Item;
 
 import javax.inject.Named;
@@ -35,5 +36,21 @@ public class ItemDatabase {
             if (part.equals(item)) contains = true;
         }
         return contains;
+    }
+
+    public Item updateItemInDatabase(String itemId, Item newItem) throws UnknownResourceException {
+        if (itemDatabaseContainsItemWithItemId(itemId)==null){
+            throw new UnknownResourceException("itemId :" + itemId, "Item");
+        }
+        itemDatabase.set(itemDatabase.indexOf(itemDatabaseContainsItemWithItemId(itemId)),newItem.setItemId(itemId));
+        return newItem;
+    }
+
+    private Item itemDatabaseContainsItemWithItemId(String itemId) {
+        Item returnItem = null;
+        for (Item item :itemDatabase) {
+            if (item.getItemId().toString().equals(itemId)) returnItem = item;
+        }
+        return returnItem;
     }
 }

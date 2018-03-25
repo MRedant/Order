@@ -23,7 +23,7 @@ public class CustomerController {
     }
 
     @PostMapping(produces = APPLICATION_JSON_VALUE)
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(HttpStatus.CREATED)
     public CustomerDto addCustomerToDatabase (@RequestBody CustomerDto customerDto){
         return customerMapper.toDto(customerService.addCustomerToDatabase(customerMapper.toDomain(customerDto)));
     }

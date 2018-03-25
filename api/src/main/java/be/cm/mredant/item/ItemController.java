@@ -21,8 +21,14 @@ public class ItemController {
     }
 
     @PostMapping(produces = APPLICATION_JSON_VALUE)
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(HttpStatus.CREATED)
     public ItemDto addItem (@RequestBody ItemDto itemDto){
         return itemMapper.toDto(itemService.addNewItemToDatabase(itemMapper.toDomain(itemDto)));
+    }
+
+    @PutMapping(path = "/{itemId}", consumes = APPLICATION_JSON_VALUE,produces = APPLICATION_JSON_VALUE)
+    @ResponseStatus(HttpStatus.OK)
+    public ItemDto updateItem (@RequestBody ItemDto newItem, @PathVariable("itemId") String itemId ){
+        return itemMapper.toDto(itemService.updateItemInDatabase(itemId,itemMapper.toDomain(newItem)));
     }
 }

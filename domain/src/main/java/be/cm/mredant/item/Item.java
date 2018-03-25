@@ -40,6 +40,11 @@ public class Item {
         return itemStock;
     }
 
+    public Item setItemId(String itemId) {
+        this.itemId = UUID.fromString(itemId);
+        return this;
+    }
+
     @Override
     public String toString() {
         return "Item{" +

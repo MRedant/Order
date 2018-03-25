@@ -15,7 +15,11 @@ public class ItemRepository {
         this.itemDatabase = itemDatabase;
     }
 
-    public Item addItemToDatabase(Item item){
+    public Item addItemToDatabase(Item item) {
         return itemDatabase.addNewItem(item);
+    }
+
+    public Item updateItemInDatabase(String itemId, Item newItem) {
+        return itemDatabase.updateItemInDatabase(itemId, newItem);
     }
 }

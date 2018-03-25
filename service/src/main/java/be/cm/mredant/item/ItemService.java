@@ -16,4 +16,8 @@ public class ItemService {
     public Item addNewItemToDatabase(Item item){
         return itemRepository.addItemToDatabase(item);
     }
+
+    public Item updateItemInDatabase(String itemId, Item newItem) {
+        return itemRepository.updateItemInDatabase(itemId, newItem);
+    }
 }
