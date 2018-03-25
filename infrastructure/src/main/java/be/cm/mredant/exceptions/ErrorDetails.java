@@ -25,4 +25,9 @@ public class ErrorDetails {
     public String getDetails() {
         return details;
     }
+
+    @Override
+    public String toString() {
+        return  "time: "+timestamp +" /message: "+ message + " /details: " + details ;
+    }
 }
