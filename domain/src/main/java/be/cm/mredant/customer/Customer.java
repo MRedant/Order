@@ -16,7 +16,7 @@ public class Customer {
     private Address address;
     private PhoneNumber phoneNumber;
 
-    Customer(String firstName, String lastName, Email email, Address address, PhoneNumber phoneNumber) {
+    private Customer(String firstName, String lastName, Email email, Address address, PhoneNumber phoneNumber) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
