@@ -21,8 +21,6 @@ public class OrderedItemMapper {
     public OrderedItem toDomain(OrderedItemDto orderedItemDto){
         return OrderedItem.OrderedItemBuilder.builder()
                 .withOrderedAmount(orderedItemDto.getOrderedAmount())
-                .withPriceOrdered(BigDecimal.valueOf(orderedItemDto.getPriceOrdered()))
-                .withShippingDate(orderedItemDto.getShippingDate().toInstant())
                 .build();
     }
 

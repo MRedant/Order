@@ -20,7 +20,7 @@ public class OrderRepository {
         return orderDatabase.getOrderList();
     }
 
-    public Order addOrders(Order order) {
+    public Order addOrder(Order order) {
         return orderDatabase.addNewOrderToList(order);
     }
 }

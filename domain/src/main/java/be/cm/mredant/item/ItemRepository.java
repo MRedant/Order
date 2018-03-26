@@ -1,9 +1,11 @@
 package be.cm.mredant.item;
 
+import be.cm.mredant.exceptions.UnknownResourceException;
 import be.cm.mredant.item.databases.ItemDatabase;
 
 import javax.inject.Inject;
 import javax.inject.Named;
+import java.util.UUID;
 
 @Named
 public class ItemRepository {
@@ -21,5 +23,12 @@ public class ItemRepository {
 
     public Item updateItemInDatabase(String itemId, Item newItem) {
         return itemDatabase.updateItemInDatabase(itemId, newItem);
+    }
+
+    public Item getItemById(String itemId) throws UnknownResourceException {
+        for (Item item : itemDatabase.getListDatabase()) {
+            if (item.getItemId().toString().equals(itemId)) return item;
+        }
+        throw new UnknownResourceException("itemId :" + itemId, "Item");
     }
 }
