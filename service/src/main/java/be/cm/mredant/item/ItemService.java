@@ -2,7 +2,6 @@ package be.cm.mredant.item;
 
 import javax.inject.Inject;
 import javax.inject.Named;
-import java.util.UUID;
 
 @Named
 public class ItemService {
@@ -20,6 +19,10 @@ public class ItemService {
 
     public Item updateItemInDatabase(String itemId, Item newItem) {
         return itemRepository.updateItemInDatabase(itemId, newItem);
+    }
+
+    public void removeStockForItem (String itemId, Integer amount){
+        itemRepository.removeStockForItem(itemId,amount);
     }
 
     public Item getItemById (String itemId){

@@ -1,9 +1,6 @@
 package be.cm.mredant;
 
-import be.cm.mredant.exceptions.EntryAlreadyExistsInDatabaseException;
-import be.cm.mredant.exceptions.ErrorDetails;
-import be.cm.mredant.exceptions.UnKnownFieldFoundException;
-import be.cm.mredant.exceptions.UnknownResourceException;
+import be.cm.mredant.exceptions.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -40,6 +37,14 @@ public class OrderControllerAdvice extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(UnknownResourceException.class)
     public final ResponseEntity<ErrorDetails> convertIllegalFieldFoundException(UnknownResourceException exception, WebRequest request) {
+        ErrorDetails errorDetails = new ErrorDetails(new Date(), exception.getMessage(),
+                request.getDescription(false));
+        logger.error(errorDetails);
+        return new ResponseEntity<>(errorDetails,HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(OutOfStockEception.class)
+    public final ResponseEntity<ErrorDetails> convertIllegalFieldFoundException(OutOfStockEception exception, WebRequest request) {
         ErrorDetails errorDetails = new ErrorDetails(new Date(), exception.getMessage(),
                 request.getDescription(false));
         logger.error(errorDetails);

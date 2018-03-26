@@ -1,6 +1,7 @@
 package be.cm.mredant.item.databases;
 
 import be.cm.mredant.exceptions.EntryAlreadyExistsInDatabaseException;
+import be.cm.mredant.exceptions.OutOfStockEception;
 import be.cm.mredant.exceptions.UnknownResourceException;
 import be.cm.mredant.item.Item;
 
@@ -52,5 +53,14 @@ public class ItemDatabase {
             if (item.getItemId().toString().equals(itemId)) returnItem = item;
         }
         return returnItem;
+    }
+
+    public void removeStockForItem (String itemId, Integer amount) throws OutOfStockEception{
+        Item item = itemDatabaseContainsItemWithItemId(itemId);
+        if (item.getItemStock()>=amount){
+            item.setItemStock(item.getItemStock()-amount);
+        } else {
+            throw new OutOfStockEception(item.getItemStock(),item.getItemName());
+        }
     }
 }

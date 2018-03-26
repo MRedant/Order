@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
@@ -31,6 +33,14 @@ public class OrderController {
     @ResponseStatus(HttpStatus.CREATED)
     public Double addNewOrder(@RequestBody InComingOrderDto inComingOrder) {
         return orderService.addOrders(inComingOrderMapper.toDomain(inComingOrder));
+    }
+
+    @GetMapping(path = "/{customerId}",produces = APPLICATION_JSON_VALUE)
+    @ResponseStatus(HttpStatus.OK)
+    public List<OrderDto> getAllOrdersForCustomer (@PathVariable("customerId")String customerId){
+        return orderService.getAllOrdersForCustomerId(customerId).stream()
+                        .map(e->orderMapper.toDto(e))
+                        .collect(Collectors.toList());
     }
 
 }

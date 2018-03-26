@@ -5,7 +5,6 @@ import be.cm.mredant.order.orderedItem.OrderedItem;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 import java.util.UUID;
 
 public class Order {
@@ -13,11 +12,19 @@ public class Order {
     private UUID orderId;
     private Customer customer;
     private List<OrderedItem> orderedItemList;
+    private Double totalOrderedPrice;
 
     private Order(List<OrderedItem> orderedItemList, Customer customer) {
         this.orderId = UUID.randomUUID();
         this.orderedItemList = orderedItemList;
         this.customer = customer;
+        this.totalOrderedPrice = calculateTotalOrderPrice(orderedItemList);
+    }
+
+    private Double calculateTotalOrderPrice(List<OrderedItem> orderedItemList) {
+        return orderedItemList.stream()
+                .mapToDouble(e->e.getOrderedAmount()*(e.getPriceOrdered()))
+                .sum();
     }
 
     public List<OrderedItem> getOrderedItemList() {
@@ -32,29 +39,8 @@ public class Order {
         return customer;
     }
 
-    @Override
-    public String toString() {
-        return "Order{" +
-                "orderId=" + orderId +
-                ", customer=" + customer +
-                ", orderedItemList=" + orderedItemList +
-                '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Order order = (Order) o;
-        return Objects.equals(getOrderId(), order.getOrderId()) &&
-                Objects.equals(getCustomer(), order.getCustomer()) &&
-                Objects.equals(getOrderedItemList(), order.getOrderedItemList());
-    }
-
-    @Override
-    public int hashCode() {
-
-        return Objects.hash(getOrderId(), getCustomer(), getOrderedItemList());
+    public Double getTotalOrderedPrice() {
+        return totalOrderedPrice;
     }
 
     public static class OrderBuilder {

@@ -8,8 +8,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import java.math.BigDecimal;
-
 public class UnitTestItemDatabaseTest {
 
 
@@ -22,7 +20,7 @@ public class UnitTestItemDatabaseTest {
         Item item = Item.ItemBuilder.builder()
                 .withItemName("HP Envy")
                 .withItemDescription("Super fast laptop")
-                .withPrice(BigDecimal.valueOf(1234.25))
+                .withPrice(1234.25)
                 .withItemStock(5)
                 .build();
 
@@ -40,7 +38,7 @@ public class UnitTestItemDatabaseTest {
         Item item = Item.ItemBuilder.builder()
                 .withItemName("HP Envy")
                 .withItemDescription("Super fast laptop")
-                .withPrice(BigDecimal.valueOf(1234.25))
+                .withPrice(1234.25)
                 .withItemStock(5)
                 .build();
 
@@ -61,21 +59,21 @@ public class UnitTestItemDatabaseTest {
         Item item = Item.ItemBuilder.builder()
                 .withItemName("HP Envy")
                 .withItemDescription("Super fast laptop")
-                .withPrice(BigDecimal.valueOf(1234.25))
+                .withPrice(1234.25)
                 .withItemStock(5)
                 .build();
 
         Item updatedItem = Item.ItemBuilder.builder()
                 .withItemName("HP Envy")
                 .withItemDescription("Super fast laptop")
-                .withPrice(BigDecimal.valueOf(2500.25))
+                .withPrice(2500.25)
                 .withItemStock(2)
                 .build();
 
         Item expectedItem = Item.ItemBuilder.builder()
                 .withItemName("HP Envy")
                 .withItemDescription("Super fast laptop")
-                .withPrice(BigDecimal.valueOf(2500.25))
+                .withPrice(2500.25)
                 .withItemStock(2)
                 .build()
                 .setItemId(item.getItemId().toString());
@@ -96,21 +94,21 @@ public class UnitTestItemDatabaseTest {
         Item item = Item.ItemBuilder.builder()
                 .withItemName("HP Envy")
                 .withItemDescription("Super fast laptop")
-                .withPrice(BigDecimal.valueOf(1234.25))
+                .withPrice(1234.25)
                 .withItemStock(5)
                 .build();
 
         Item updatedItem = Item.ItemBuilder.builder()
                 .withItemName("HP Envy")
                 .withItemDescription("Super fast laptop")
-                .withPrice(BigDecimal.valueOf(2500.25))
+                .withPrice(2500.25)
                 .withItemStock(2)
                 .build();
 
         Item expectedItem = Item.ItemBuilder.builder()
                 .withItemName("HP Envy")
                 .withItemDescription("Super fast laptop")
-                .withPrice(BigDecimal.valueOf(2500.25))
+                .withPrice(2500.25)
                 .withItemStock(2)
                 .build()
                 .setItemId(item.getItemId().toString());

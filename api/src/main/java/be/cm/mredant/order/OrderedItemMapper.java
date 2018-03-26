@@ -13,6 +13,7 @@ public class OrderedItemMapper {
                 .withOrderedAmount(orderedItem.getOrderedAmount())
                 .withPriceOrdered(orderedItem.getPriceOrdered())
                 .withShippingDate(orderedItem.getShippingDate())
+                .withtotalOrderPrice(orderedItem.getTotalOrderPrice())
                 .build();
     }
 

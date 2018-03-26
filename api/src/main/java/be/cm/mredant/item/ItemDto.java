@@ -1,6 +1,5 @@
 package be.cm.mredant.item;
 
-import java.math.BigDecimal;
 import java.util.UUID;
 
 public class ItemDto {
@@ -49,7 +48,7 @@ public class ItemDto {
         return this;
     }
 
-    public ItemDto withPrice(BigDecimal price) {
+    public ItemDto withPrice(Double price) {
         this.price = price.doubleValue();
         return this;
     }

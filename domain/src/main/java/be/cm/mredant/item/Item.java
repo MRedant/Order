@@ -1,6 +1,5 @@
 package be.cm.mredant.item;
 
-import java.math.BigDecimal;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -9,10 +8,10 @@ public class Item {
     private UUID itemId;
     private String itemName;
     private String itemDescription;
-    private BigDecimal price;
+    private Double price;
     private Integer itemStock;
 
-    private Item(String itemName, String itemDescription, BigDecimal price, Integer itemStock) {
+    private Item(String itemName, String itemDescription, Double price, Integer itemStock) {
         this.itemId = UUID.randomUUID();
         this.itemName = itemName;
         this.itemDescription = itemDescription;
@@ -32,7 +31,7 @@ public class Item {
         return itemDescription;
     }
 
-    public BigDecimal getPrice() {
+    public Double getPrice() {
         return price;
     }
 
@@ -43,6 +42,10 @@ public class Item {
     public Item setItemId(String itemId) {
         this.itemId = UUID.fromString(itemId);
         return this;
+    }
+
+    public void setItemStock(Integer itemStock) {
+        this.itemStock = itemStock;
     }
 
     @Override
@@ -76,7 +79,7 @@ public class Item {
     public static class ItemBuilder {
         private String itemName;
         private String itemDescription;
-        private BigDecimal price;
+        private Double price;
         private Integer itemStock;
 
         private ItemBuilder() {
@@ -96,7 +99,7 @@ public class Item {
             return this;
         }
 
-        public ItemBuilder withPrice(BigDecimal price) {
+        public ItemBuilder withPrice(Double price) {
             this.price = price;
             return this;
         }

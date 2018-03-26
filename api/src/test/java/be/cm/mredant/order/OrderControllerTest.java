@@ -9,8 +9,6 @@ import be.cm.mredant.item.Item;
 import be.cm.mredant.item.ItemService;
 import be.cm.mredant.order.incomingOrders.InComingOrder;
 import be.cm.mredant.order.incomingOrders.ItemGroup;
-import org.assertj.core.api.Assertions;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -25,24 +23,24 @@ import java.util.Arrays;
 import static org.springframework.boot.SpringApplication.run;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,classes = OrderServiceTest.Application.class)
-public class OrderServiceTest {
+@SpringBootTest(
+        webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
+        classes = OrderControllerTest.Application.class)
+@AutoConfigureMockMvc
+public class OrderControllerTest {
 
     @LocalServerPort
     private int port;
 
     @Inject
     private OrderService orderService;
-
+    @Inject
+    private CustomerService customerService;
     @Inject
     private ItemService itemService;
 
-    @Inject
-    private CustomerService customerService;
-
     @Test
-    @Ignore
-    public void HappyPath_IntegrationTest_addOrders_GivenACustomerAnd1Item_CreateNewOrder_ShouldReturnSumOfPrice() {
+    public void addNewOrder() {
         //GIVEN
         Customer customer = Customer.CustomerBuilder.builder()
                 .withFirstName("Jan")
@@ -63,22 +61,29 @@ public class OrderServiceTest {
         customerService.addCustomerToDatabase(customer);
 
         //WHEN
-        Double totalPrice = orderService.addOrders(InComingOrder.builder()
+        Double priceOrder = orderService.addOrders(InComingOrder.builder()
                 .withCustomer(customer.getCustomerId().toString())
                 .withItemGroup(Arrays.asList(ItemGroup.builder()
                         .withItemId(item.getItemId().toString())
                         .withAmount(1))));
+
         //THEN
-        Assertions.assertThat(totalPrice).isEqualTo("order for a total of : 500€");
+
     }
+
+    @Test
+    public void getAllOrdersForCustomer() {
+    }
+
 
     @SpringBootApplication(scanBasePackages = {"be.cm.mredant"})
     public static class Application {
 
-                public static void main(String[] args) {
+        public static void main(String[] args) {
 
             run(Application.class, args);
         }
+
+
     }
 }
-

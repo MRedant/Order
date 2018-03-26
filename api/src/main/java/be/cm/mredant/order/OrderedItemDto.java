@@ -1,6 +1,5 @@
 package be.cm.mredant.order;
 
-import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.Date;
 import java.util.UUID;
@@ -11,12 +10,14 @@ public class OrderedItemDto {
     private Double priceOrdered;
     private Integer orderedAmount;
     private Date shippingDate;
+    private Double totalOrderPrice;
 
-    private OrderedItemDto(String itemId, Double priceOrdered, Integer orderedAmount, Date shippingDate) {
+    private OrderedItemDto(String itemId, Double priceOrdered, Integer orderedAmount, Date shippingDate, Double totalOrderPrice) {
         this.itemId = itemId;
         this.priceOrdered = priceOrdered;
         this.orderedAmount = orderedAmount;
         this.shippingDate = shippingDate;
+        this.totalOrderPrice=totalOrderPrice;
     }
 
     public String getItemId() {
@@ -35,11 +36,16 @@ public class OrderedItemDto {
         return shippingDate;
     }
 
+    public Double getTotalOrderPrice() {
+        return totalOrderPrice;
+    }
+
     public static class OrderedItemDtoBuilder {
         private String itemId;
         private Double priceOrdered;
         private Integer orderedAmount;
         private Date shippingDate;
+        private Double totalOrderPrice;
 
         public static OrderedItemDtoBuilder builder() {
             return new OrderedItemDtoBuilder();
@@ -50,8 +56,8 @@ public class OrderedItemDto {
             return this;
         }
 
-        public OrderedItemDtoBuilder withPriceOrdered(BigDecimal priceOrdered) {
-            this.priceOrdered = priceOrdered.doubleValue();
+        public OrderedItemDtoBuilder withPriceOrdered(Double priceOrdered) {
+            this.priceOrdered = priceOrdered;
             return this;
         }
 
@@ -65,8 +71,13 @@ public class OrderedItemDto {
             return this;
         }
 
+        public OrderedItemDtoBuilder withtotalOrderPrice(Double totalOrderPrice){
+            this.totalOrderPrice=totalOrderPrice;
+            return this;
+        }
+
         public OrderedItemDto build() {
-            return new OrderedItemDto(itemId, priceOrdered, orderedAmount, shippingDate);
+            return new OrderedItemDto(itemId, priceOrdered, orderedAmount, shippingDate, totalOrderPrice);
         }
     }
 }

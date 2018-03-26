@@ -9,11 +9,13 @@ public class OrderDto {
     private String orderNr;
     private CustomerDto customer;
     private List<OrderedItemDto> orderedItemList;
+    private Double totalOrderPrice;
 
-    private OrderDto(String orderNr, CustomerDto customer, List<OrderedItemDto> orderedItemList) {
+    private OrderDto(String orderNr, CustomerDto customer, List<OrderedItemDto> orderedItemList, Double totalOrderPrice) {
         this.orderNr = orderNr;
         this.customer = customer;
         this.orderedItemList = orderedItemList;
+        this.totalOrderPrice = totalOrderPrice;
     }
 
     public String getOrderNr() {
@@ -24,6 +26,10 @@ public class OrderDto {
         return customer;
     }
 
+    public Double getTotalOrderPrice() {
+        return totalOrderPrice;
+    }
+
     public List<OrderedItemDto> getOrderedItemList() {
         return orderedItemList;
     }
@@ -32,6 +38,7 @@ public class OrderDto {
         private String orderNr;
         private CustomerDto customer;
         private List<OrderedItemDto> orderedItemList;
+        private Double totalOrderPrice;
 
         public static OrderDtoBuilder builder() {
             return new OrderDtoBuilder();
@@ -52,8 +59,13 @@ public class OrderDto {
             return this;
         }
 
+        public OrderDtoBuilder withTotalOrderPrice(Double totalOrderPrice){
+            this.totalOrderPrice=totalOrderPrice;
+            return this;
+        }
+
         public OrderDto build() {
-            return new OrderDto(orderNr, customer, orderedItemList);
+            return new OrderDto(orderNr, customer, orderedItemList, totalOrderPrice);
         }
     }
 }

@@ -24,6 +24,10 @@ public class ItemRepository {
         return itemDatabase.updateItemInDatabase(itemId, newItem);
     }
 
+    public void removeStockForItem (String itemId, Integer amount){
+        itemDatabase.removeStockForItem(itemId,amount);
+    }
+
     public Item getItemById(String itemId) throws UnknownResourceException {
         for (Item item : itemDatabase.getListDatabase()) {
             if (item.getItemId().toString().equals(itemId)) return item;

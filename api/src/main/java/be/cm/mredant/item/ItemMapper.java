@@ -20,7 +20,7 @@ public class ItemMapper {
                 .withItemName(itemDto.getItemName())
                 .withItemDescription(itemDto.getItemDescription())
                 .withItemStock(itemDto.getItemStock())
-                .withPrice(BigDecimal.valueOf(itemDto.getPrice()))
+                .withPrice(itemDto.getPrice())
                 .build();
     }
 }

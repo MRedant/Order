@@ -12,6 +12,8 @@ import javax.inject.Named;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.StringJoiner;
+import java.util.stream.Collectors;
 
 @Named
 public class OrderService {
@@ -29,39 +31,46 @@ public class OrderService {
 
     public Double addOrders(InComingOrder inComingOrder) {
         List<OrderedItem> orderedItemList = assembleOrderList(inComingOrder.getItemGroup());
-
-        orderRepository.addOrder(Order.OrderBuilder.builder()
-                                        .withCustomer(customerService.getCustomerById(inComingOrder.getCustomer()))
-                                        .withOrderedItemList(orderedItemList)
-                                        .build());
-
-        return calculateTotalPriceOfOrder(orderedItemList);
+        return orderRepository.addOrder(Order.OrderBuilder.builder()
+                .withCustomer(customerService.getCustomerById(inComingOrder.getCustomer()))
+                .withOrderedItemList(orderedItemList)
+                .build())
+                .getTotalOrderedPrice();
     }
 
-    private Double calculateTotalPriceOfOrder (List<OrderedItem> orderList){
-       return orderList.stream()
-               .mapToDouble(e->e.getPriceOrdered().doubleValue()*e.getOrderedAmount())
-               .sum();
-    }
-
-    private List<OrderedItem> assembleOrderList (List<ItemGroup> orderList){
+    private List<OrderedItem> assembleOrderList(List<ItemGroup> orderList) {
         List<OrderedItem> returnList = new ArrayList<>();
-        for (ItemGroup item:orderList) {
-            Item orderedItem = itemService.getItemById(item.getItemId());
+        for (ItemGroup itemGroup : orderList) {
+
+            Item orderedItem = itemService.getItemById(itemGroup.getItemId());
+
             returnList.add(OrderedItem.OrderedItemBuilder.builder()
                     .withItemId(orderedItem.getItemId())
-                    .withOrderedAmount(item.getAmount())
+                    .withOrderedAmount(itemGroup.getAmount())
                     .withPriceOrdered(orderedItem.getPrice())
-                    .withShippingDate(calculateShippingDateForItem(orderedItem,item.getAmount()))
+                    .withShippingDate(calculateShippingDateForItem(orderedItem, itemGroup.getAmount()))
                     .build());
+            itemService.removeStockForItem(itemGroup.getItemId(), itemGroup.getAmount());
         }
         return returnList;
     }
 
-    private Instant calculateShippingDateForItem(Item item, Integer orderedAmount){
-        if (item.getItemStock()>=orderedAmount) {
+    private Instant calculateShippingDateForItem(Item item, Integer orderedAmount) {
+        if (item.getItemStock() >= orderedAmount) {
             return Instant.now().plusSeconds(86400); //86400sec = 1 day
         }
         return Instant.now().plusSeconds(604800); //604800sec = 1 week
+    }
+
+    public List<Order> getAllOrdersForCustomerId(String customerId) {
+        return orderRepository.getOrderList().stream()
+                .filter(e -> e.getCustomer().getCustomerId().toString().equals(customerId))
+                .collect(Collectors.toList());
+    }
+
+    public Double getTotalPriceOfAllOrdersForAListOfOrders(List<Order> customerOrders) {
+        return customerOrders.stream()
+                .mapToDouble(Order::getTotalOrderedPrice)
+                .sum();
     }
 }
