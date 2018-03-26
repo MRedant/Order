@@ -7,6 +7,7 @@ import java.util.*;
 
 @Named
 public class OrderDatabase {
+
     private List<Order> orderList;
 
     public OrderDatabase() {

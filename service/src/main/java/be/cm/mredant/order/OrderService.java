@@ -12,7 +12,6 @@ import javax.inject.Named;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 @Named
 public class OrderService {

@@ -5,7 +5,6 @@ import be.cm.mredant.item.databases.ItemDatabase;
 
 import javax.inject.Inject;
 import javax.inject.Named;
-import java.util.UUID;
 
 @Named
 public class ItemRepository {
