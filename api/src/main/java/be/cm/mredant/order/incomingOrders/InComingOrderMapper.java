@@ -8,7 +8,7 @@ public class InComingOrderMapper {
 
     public InComingOrder toDomain(InComingOrderDto inComingOrderDto){
         return InComingOrder.builder()
-                .withCustomer(inComingOrderDto.getCustomer())
+                .withCustomer(inComingOrderDto.getCustomerId())
                 .withItemGroup(inComingOrderDto.getItemGroup().stream().map(e->itemGroupToDomain(e))
                 .collect(Collectors.toList()));
     }

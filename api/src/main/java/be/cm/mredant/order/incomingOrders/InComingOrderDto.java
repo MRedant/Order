@@ -9,7 +9,7 @@ public class InComingOrderDto {
     private InComingOrderDto() {
     }
 
-    public String getCustomer() {
+    public String getCustomerId() {
         return customerId;
     }
 

@@ -3,8 +3,6 @@ package be.cm.mredant.order;
 import be.cm.mredant.order.orderedItem.OrderedItem;
 
 import javax.inject.Named;
-import java.math.BigDecimal;
-import java.util.UUID;
 
 @Named
 public class OrderedItemMapper {
@@ -23,5 +21,4 @@ public class OrderedItemMapper {
                 .withOrderedAmount(orderedItemDto.getOrderedAmount())
                 .build();
     }
-
 }
