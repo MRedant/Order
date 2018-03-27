@@ -6,21 +6,27 @@ import java.util.UUID;
 public class OrderedItem {
 
     private UUID itemId;
+    private String productName;
     private Double priceOrdered;
     private Integer orderedAmount;
     private Instant shippingDate;
     private Double totalOrderPrice;
 
-    private OrderedItem(UUID itemId, Double priceOrdered, Instant shippingDate, Integer orderedAmount) {
+    private OrderedItem(UUID itemId, String productName, Double priceOrdered, Instant shippingDate, Integer orderedAmount) {
         this.priceOrdered = priceOrdered;
+        this.productName = productName;
         this.orderedAmount = orderedAmount;
         this.shippingDate = shippingDate;
         this.itemId = itemId;
-        this.totalOrderPrice = orderedAmount*priceOrdered;
+        this.totalOrderPrice = orderedAmount * priceOrdered;
     }
 
     public UUID getItemId() {
         return itemId;
+    }
+
+    public String getProductName() {
+        return productName;
     }
 
     public Double getPriceOrdered() {
@@ -41,6 +47,7 @@ public class OrderedItem {
 
     public static class OrderedItemBuilder {
         private UUID itemId;
+        private String productName;
         private Double priceOrdered;
         private Instant shippingDate;
         private Integer orderedAmount;
@@ -51,6 +58,11 @@ public class OrderedItem {
 
         public OrderedItemBuilder withItemId(UUID itemId) {
             this.itemId = itemId;
+            return this;
+        }
+
+        public OrderedItemBuilder withProductName(String productName) {
+            this.productName = productName;
             return this;
         }
 
@@ -70,7 +82,7 @@ public class OrderedItem {
         }
 
         public OrderedItem build() {
-            return new OrderedItem(itemId, priceOrdered, shippingDate, orderedAmount);
+            return new OrderedItem(itemId, productName, priceOrdered, shippingDate, orderedAmount);
         }
     }
 

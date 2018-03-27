@@ -12,7 +12,6 @@ import javax.inject.Named;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.StringJoiner;
 import java.util.stream.Collectors;
 
 @Named
@@ -46,6 +45,7 @@ public class OrderService {
 
             returnList.add(OrderedItem.OrderedItemBuilder.builder()
                     .withItemId(orderedItem.getItemId())
+                    .withProductName(orderedItem.getItemName())
                     .withOrderedAmount(itemGroup.getAmount())
                     .withPriceOrdered(orderedItem.getPrice())
                     .withShippingDate(calculateShippingDateForItem(orderedItem, itemGroup.getAmount()))

@@ -10,6 +10,7 @@ public class OrderedItemMapper {
     public OrderedItemDto toDto(OrderedItem orderedItem){
         return OrderedItemDto.OrderedItemDtoBuilder.builder()
                 .withItemId(orderedItem.getItemId())
+                .withProductName(orderedItem.getProductName())
                 .withOrderedAmount(orderedItem.getOrderedAmount())
                 .withPriceOrdered(orderedItem.getPriceOrdered())
                 .withShippingDate(orderedItem.getShippingDate())

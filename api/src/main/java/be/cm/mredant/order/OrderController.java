@@ -7,7 +7,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
@@ -37,10 +39,14 @@ public class OrderController {
 
     @GetMapping(path = "/{customerId}",produces = APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
-    public List<OrderDto> getAllOrdersForCustomer (@PathVariable("customerId")String customerId){
-        return orderService.getAllOrdersForCustomerId(customerId).stream()
-                        .map(e->orderMapper.toDto(e))
-                        .collect(Collectors.toList());
+    public  Map<Double, List<OrderDto>> getAllOrdersForCustomer (@PathVariable("customerId")String customerId){
+        Map<Double, List<OrderDto>> returnMap = new HashMap<>();
+        List<OrderDto> valueList = orderService.getAllOrdersForCustomerId(customerId).stream()
+                .map(e->orderMapper.toDto(e))
+                .collect(Collectors.toList());
+        Double totalPriceAllOrders = orderService.getTotalPriceOfAllOrdersForAListOfOrders(orderService.getAllOrdersForCustomerId(customerId));
+        returnMap.put(totalPriceAllOrders,valueList);
+        return returnMap;
     }
 
 }

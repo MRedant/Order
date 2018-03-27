@@ -22,6 +22,7 @@ public class OrderMapper {
                         .stream()
                         .map(orderedItemMapper::toDto)
                         .collect(Collectors.toList()))
+                .withTotalOrderPrice(order.getTotalOrderedPrice())
                 .build();
     }
 
@@ -33,6 +34,4 @@ public class OrderMapper {
                         .collect(Collectors.toList()))
                 .build();
     }
-
-
 }

@@ -7,21 +7,27 @@ import java.util.UUID;
 public class OrderedItemDto {
 
     private String itemId;
+    private String productName;
     private Double priceOrdered;
     private Integer orderedAmount;
     private Date shippingDate;
     private Double totalOrderPrice;
 
-    private OrderedItemDto(String itemId, Double priceOrdered, Integer orderedAmount, Date shippingDate, Double totalOrderPrice) {
+    private OrderedItemDto(String itemId, String productName, Double priceOrdered, Integer orderedAmount, Date shippingDate, Double totalOrderPrice) {
         this.itemId = itemId;
+        this.productName = productName;
         this.priceOrdered = priceOrdered;
         this.orderedAmount = orderedAmount;
         this.shippingDate = shippingDate;
-        this.totalOrderPrice=totalOrderPrice;
+        this.totalOrderPrice = totalOrderPrice;
     }
 
     public String getItemId() {
         return itemId;
+    }
+
+    public String getProductName() {
+        return productName;
     }
 
     public Double getPriceOrdered() {
@@ -42,6 +48,7 @@ public class OrderedItemDto {
 
     public static class OrderedItemDtoBuilder {
         private String itemId;
+        private String productName;
         private Double priceOrdered;
         private Integer orderedAmount;
         private Date shippingDate;
@@ -53,6 +60,11 @@ public class OrderedItemDto {
 
         public OrderedItemDtoBuilder withItemId(UUID itemId) {
             this.itemId = itemId.toString();
+            return this;
+        }
+
+        public OrderedItemDtoBuilder withProductName(String productName) {
+            this.productName = productName;
             return this;
         }
 
@@ -71,13 +83,13 @@ public class OrderedItemDto {
             return this;
         }
 
-        public OrderedItemDtoBuilder withtotalOrderPrice(Double totalOrderPrice){
-            this.totalOrderPrice=totalOrderPrice;
+        public OrderedItemDtoBuilder withtotalOrderPrice(Double totalOrderPrice) {
+            this.totalOrderPrice = totalOrderPrice;
             return this;
         }
 
         public OrderedItemDto build() {
-            return new OrderedItemDto(itemId, priceOrdered, orderedAmount, shippingDate, totalOrderPrice);
+            return new OrderedItemDto(itemId, productName, priceOrdered, orderedAmount, shippingDate, totalOrderPrice);
         }
     }
 }
