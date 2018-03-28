@@ -15,7 +15,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.embedded.LocalServerPort;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -25,11 +24,8 @@ import java.util.Arrays;
 import static org.springframework.boot.SpringApplication.run;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,classes = OrderServiceTest.Application.class)
+@SpringBootTest(classes = OrderServiceTest.Application.class)
 public class OrderServiceTest {
-
-    @LocalServerPort
-    private int port;
 
     @Inject
     private OrderService orderService;
@@ -41,7 +37,6 @@ public class OrderServiceTest {
     private CustomerService customerService;
 
     @Test
-    @Ignore
     public void HappyPath_IntegrationTest_addOrders_GivenACustomerAnd1Item_CreateNewOrder_ShouldReturnSumOfPrice() {
         //GIVEN
         Customer customer = Customer.CustomerBuilder.builder()
@@ -69,7 +64,7 @@ public class OrderServiceTest {
                         .withItemId(item.getItemId().toString())
                         .withAmount(1))));
         //THEN
-        Assertions.assertThat(totalPrice).isEqualTo("order for a total of : 500€");
+        Assertions.assertThat(totalPrice).isEqualTo(500);
     }
 
     @SpringBootApplication(scanBasePackages = {"be.cm.mredant"})

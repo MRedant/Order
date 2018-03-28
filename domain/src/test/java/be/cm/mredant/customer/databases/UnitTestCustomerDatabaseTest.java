@@ -23,8 +23,8 @@ public class UnitTestCustomerDatabaseTest {
                 .withFirstName("Jan")
                 .withLastName("Metdepet")
                 .withAddress(Address.of("Hutsepot","12a","Ghent","9052a"))
-                .withPhoneNumber(PhoneNumber.of("09/221.99.78"))
-                .withEmail(Email.of("mredant@gmail.com"))
+                .withPhoneNumber(PhoneNumber.of("01/23.45.56"))
+                .withEmail(Email.of("piet@depetteflet.be"))
                 .build();
 
         CustomerDatabase database = new CustomerDatabase();
@@ -43,8 +43,8 @@ public class UnitTestCustomerDatabaseTest {
                 .withFirstName("Jan")
                 .withLastName("Metdepet")
                 .withAddress(Address.of("Hutsepot","12a","Ghent","9052a"))
-                .withPhoneNumber(PhoneNumber.of("09/221.99.78"))
-                .withEmail(Email.of("mredant@gmail.com"))
+                .withPhoneNumber(PhoneNumber.of("01/23.45.67"))
+                .withEmail(Email.of("piet@depetteflet.be"))
                 .build();
 
         CustomerDatabase database = new CustomerDatabase();
@@ -64,8 +64,8 @@ public class UnitTestCustomerDatabaseTest {
                 .withFirstName("Jan")
                 .withLastName("Metdepet")
                 .withAddress(Address.of("Hutsepot","12a","Ghent","9052a"))
-                .withPhoneNumber(PhoneNumber.of("09/221.99.78"))
-                .withEmail(Email.of("mredant@gmail.com"))
+                .withPhoneNumber(PhoneNumber.of("01/23.45.56"))
+                .withEmail(Email.of("jan@pietjoris.corneel"))
                 .build();
 
         CustomerDatabase database = new CustomerDatabase();
@@ -86,8 +86,8 @@ public class UnitTestCustomerDatabaseTest {
                 .withFirstName("Jan")
                 .withLastName("Metdepet")
                 .withAddress(Address.of("Hutsepot","12a","Ghent","9052a"))
-                .withPhoneNumber(PhoneNumber.of("09/221.99.78"))
-                .withEmail(Email.of("mredant@gmail.com"))
+                .withPhoneNumber(PhoneNumber.of("01/23.45.56"))
+                .withEmail(Email.of("jan@pietjoris.corneel"))
                 .build();
 
         CustomerDatabase database = new CustomerDatabase();

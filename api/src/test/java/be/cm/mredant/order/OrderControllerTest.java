@@ -8,13 +8,17 @@ import be.cm.mredant.customer.phoneNumber.PhoneNumber;
 import be.cm.mredant.item.Item;
 import be.cm.mredant.item.ItemService;
 import be.cm.mredant.order.incomingOrders.InComingOrder;
+import be.cm.mredant.order.incomingOrders.InComingOrderDto;
 import be.cm.mredant.order.incomingOrders.ItemGroup;
+import be.cm.mredant.order.incomingOrders.ItemGroupDto;
+import org.assertj.core.api.Assertions;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.embedded.LocalServerPort;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.inject.Inject;
@@ -26,7 +30,6 @@ import static org.springframework.boot.SpringApplication.run;
 @SpringBootTest(
         webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
         classes = OrderControllerTest.Application.class)
-@AutoConfigureMockMvc
 public class OrderControllerTest {
 
     @LocalServerPort
@@ -60,14 +63,19 @@ public class OrderControllerTest {
         itemService.addNewItemToDatabase(item);
         customerService.addCustomerToDatabase(customer);
 
-        //WHEN
-        Double priceOrder = orderService.addOrders(InComingOrder.builder()
-                .withCustomer(customer.getCustomerId().toString())
-                .withItemGroup(Arrays.asList(ItemGroup.builder()
-                        .withItemId(item.getItemId().toString())
-                        .withAmount(1))));
 
-        //THEN
+        //WHEN
+        InComingOrderDto inComingOrder = InComingOrderDto.builder()
+                .withCustomer(customer.getCustomerId().toString())
+                .withItemGroup(Arrays.asList(ItemGroupDto.builder()
+                        .withItemId(item.getItemId().toString())
+                        .withAmount(1)));
+
+        Double result = new TestRestTemplate()
+                .postForObject(String.format("http://localhost:%s/%s", port, "order"), inComingOrder,Double.class);
+
+        Assertions.assertThat(result).isNotNull();
+        Assertions.assertThat(result).isEqualTo(500.00);
 
     }
 
