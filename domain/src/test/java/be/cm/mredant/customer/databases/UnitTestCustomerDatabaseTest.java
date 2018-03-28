@@ -65,7 +65,7 @@ public class UnitTestCustomerDatabaseTest {
                 .withLastName("Metdepet")
                 .withAddress(Address.of("Hutsepot","12a","Ghent","9052a"))
                 .withPhoneNumber(PhoneNumber.of("01/23.45.56"))
-                .withEmail(Email.of("jan@pietjoris.corneel"))
+                .withEmail(Email.of("jan@pietjoris.com"))
                 .build();
 
         CustomerDatabase database = new CustomerDatabase();
@@ -87,7 +87,7 @@ public class UnitTestCustomerDatabaseTest {
                 .withLastName("Metdepet")
                 .withAddress(Address.of("Hutsepot","12a","Ghent","9052a"))
                 .withPhoneNumber(PhoneNumber.of("01/23.45.56"))
-                .withEmail(Email.of("jan@pietjoris.corneel"))
+                .withEmail(Email.of("jan@pietjoris.com"))
                 .build();
 
         CustomerDatabase database = new CustomerDatabase();
